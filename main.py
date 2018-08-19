@@ -48,9 +48,13 @@ def scanner(proc):
 		shift = False
 		ss = ""
 		done = False
-		fp = open('/dev/hidraw2','rb')
+		print "On Scanner"
+		fp0 = open('/dev/hidraw0', 'rb')
+		fp1 = open('/dev/hidraw1', 'rb')
+		fp2 = open('/dev/hidraw2', 'rb')
+		
 		while not done:
-			buffer = fp.read(8)
+			buffer = fp2.read(8)
 			if buffer:
 				for c in buffer:
 					if ord(c) > 0:
@@ -67,7 +71,8 @@ def scanner(proc):
 							if int(ord(c)) == 2 :
 								shift = True
 							else:
-								ss += hid[ int(ord(c)) ]  
+								ss += hid[ int(ord(c)) ]
+		
 		proc.exitCode = ss
 		print 'exit: ' + proc.exitCode
 
