@@ -92,6 +92,9 @@ def getHour():
 def getDay():
 	return datetime.datetime.now().strftime('%d,%m,%Y')
 	
+def getPrintDay():
+	return datetime.datetime.now().strftime('%d/%m/%Y')
+	
 def getDayCode():
 	toRet = datetime.datetime.now().strftime('%Y%m%d%H%M')
 	toRet = toRet[3:]
@@ -327,7 +330,7 @@ class Base:
 			result = firebase.put('/Autos',codedDate,data)
 			if result != '':
 				self.placasText.set_text('')
-				self.printT(toprint,codedDate,entryHour,getDay())
+				self.printT(toprint,codedDate,entryHour,getPrintDay())
 				dialog = gtk.MessageDialog(self.window,0,gtk.MESSAGE_INFO,gtk.BUTTONS_CLOSE,'Ingreso Exitoso')
 				dialog.format_secondary_text('Entrada Registrada Exitosamente')
 				dialog.run()
@@ -342,16 +345,16 @@ class Base:
 		
 		
 		
-	def printT(self,plates,aTag,inHour):
+	def printT(self,plates,aTag,inHour,aDate):
 	
 		filename = 'print.pdf'
 		xhtml = '<html>\n<head>\n'
 		xhtml += '<style>\n@page {\nsize: 2.4in 3.4in;\nmargin: 2mm 2mm 2mm 2mm;\n}\n</style>\n'
 		xhtml += '</head>\n'
 		xhtml += '<body>\n'
-		xhtml += '<h1 style=\'text-align:center;\'>Estacionamiento Publico </br> Zacatecas 47 </br> <img src=\'https://cdn4.iconfinder.com/data/icons/car-silhouettes/1000/beetle-512.png\' style=\'width:50px;height:50px;\'> </h1>\n'
-		xhtml += '<h2 style=\'text-align:center;\'>' + plates + '</h2>\n'
-		xhtml += '<p style=\'text-align:center;\'>' + +'</h2>\n'
+		xhtml += '<h1 style=\'text-align:center;\'>Estacionamiento Publico </br> Zacatecas 47 </br> <img src=\'https://cdn4.iconfinder.com/data/icons/car-silhouettes/1000/beetle-512.png\' style=\'width:50px;height:30px;\'> </h1>\n'
+		xhtml += '<strong style=\'text-align:center;\'>' + plates + '</strong>\n'
+		xhtml += '<p style=\'text-align:center;\'>' + aDate +'</h2>\n'
 		xhtml += '<p style=\'text-align:center;\'> <b> Hora de entrada:</b> '+ inHour +'</p>\n'
 		xhtml += '<p style=\'text-align:center;\'><pdf:barcode value='+ aTag +'/></p>\n'
 		xhtml += '<p style=\'text-align:center; font-size: 45%\'>*CONSULTE NUESTRAS CLAUSULAS EN HTTP://paranoidinteractive.com/zacatecas</br>*LA RECEPCION DE ESTE BOLETO IMPLICA LA ACEPTACION DE LAS CLAUSULAS DEL ESTACIONAMIENTO </br>*NO SE RECIBEN AUTOMOVILES CON PERSONAS O MASCOTAS EN EL INTERIOR</p>\n'
