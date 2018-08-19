@@ -322,7 +322,7 @@ class Base:
 			result = firebase.put('/Autos',codedDate,data)
 			if result != '':
 				self.placasText.set_text('')
-				self.printT(toprint,codedDate,entryHour)
+				self.printT(toprint,codedDate,entryHour,getDay())
 				dialog = gtk.MessageDialog(self.window,0,gtk.MESSAGE_INFO,gtk.BUTTONS_CLOSE,'Ingreso Exitoso')
 				dialog.format_secondary_text('Entrada Registrada Exitosamente')
 				dialog.run()
@@ -346,6 +346,7 @@ class Base:
 		xhtml += '<body>\n'
 		xhtml += '<h1 style=\'text-align:center;\'>Estacionamiento Publico </br> Zacatecas 47 </br> <img src=\'https://cdn4.iconfinder.com/data/icons/car-silhouettes/1000/beetle-512.png\' style=\'width:50px;height:50px;\'> </h1>\n'
 		xhtml += '<h2 style=\'text-align:center;\'>' + plates + '</h2>\n'
+		xhtml += '<p style=\'text-align:center;\'>' + +'</h2>\n'
 		xhtml += '<p style=\'text-align:center;\'> <b> Hora de entrada:</b> '+ inHour +'</p>\n'
 		xhtml += '<p style=\'text-align:center;\'><pdf:barcode value='+ aTag +'/></p>\n'
 		xhtml += '<p style=\'text-align:center; font-size: 45%\'>*CONSULTE NUESTRAS CLAUSULAS EN HTTP://paranoidinteractive.com/zacatecas</br>*LA RECEPCION DE ESTE BOLETO IMPLICA LA ACEPTACION DE LAS CLAUSULAS DEL ESTACIONAMIENTO </br>*NO SE RECIBEN AUTOMOVILES CON PERSONAS O MASCOTAS EN EL INTERIOR</p>\n'
